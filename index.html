@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Pay Demo (by Talha)</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Favicon / Apple touch -->
+  <link rel="icon" href="https://i.postimg.cc/1Xk9bjC2/Copilot-20250921-112342.png">
+  <link rel="apple-touch-icon" href="https://i.postimg.cc/1Xk9bjC2/Copilot-20250921-112342.png">
+  <meta name="theme-color" content="#0c0f16" />
+</head>
+<body>
+  <!-- SVG sprite (icons) -->
+  <svg style="display:none;" aria-hidden="true">
+    <symbol id="home" viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V21a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V10.5z"/></symbol>
+    <symbol id="send" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></symbol>
+    <symbol id="history" viewBox="0 0 24 24"><path d="M13 3a9 9 0 1 0 8 6.32V11h-2V6h5V4h-4V1h-2v2h-1zM12 7v6l4 2"/></symbol>
+    <symbol id="profile" viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5v1h18v-1c0-2.5-4-5-9-5z"/></symbol>
+    <symbol id="alert" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.72 3h16.92a2 2 0 0 0 1.72-3L13.71 3.86a2 2 0 0 0-3.42 0zM12 9v4M12 17h.01"/></symbol>
+    <symbol id="success" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></symbol>
+    <symbol id="cashout" viewBox="0 0 24 24"><path d="M21 8V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v1"/><path d="M7 13h10v6H7z"/></symbol>
+    <symbol id="recharge" viewBox="0 0 24 24"><path d="M12 2v6l4-4"/><path d="M12 22v-6l-4 4"/></symbol>
+    <symbol id="bill" viewBox="0 0 24 24"><path d="M21 15V5a2 2 0 0 0-2-2H7L3 7v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2z"/></symbol>
+    <symbol id="add" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="settings" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7z"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06A2 2 0 1 1 2.27 17.9l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82L4.2 4.27A2 2 0 1 1 7 1.44l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V1a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.09a1.65 1.65 0 0 0 1.82-.33l.06-.06A2 2 0 1 1 19.4 6z"/></symbol>
+  </svg>
+  <!-- App Shell -->
+  <header class="app-header">
+    <div class="brand">
+      <!-- Brand image -->
+      <img class="logo" width="28" height="28" src="https://i.postimg.cc/1Xk9bjC2/Copilot-20250921-112342.png" alt="bPay logo" />
+      <span class="brand-name">Pay Demo (by Talha)</span>
+    </div>
+    <button id="themeToggle" class="btn btn-ghost" aria-label="Toggle theme">Theme</button>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav">
+      <ul>
+        <li><a href="#/dashboard" class="nav-link" data-route>Dashboard</a></li>
+        <li><a href="#/send" class="nav-link" data-route>Send Money</a></li>
+        <li><a href="#/cashout" class="nav-link" data-route>Cash Out</a></li>
+        <li><a href="#/recharge" class="nav-link" data-route>Mobile Recharge</a></li>
+        <li><a href="#/billpay" class="nav-link" data-route>Pay Bill</a></li>
+        <li><a href="#/addmoney" class="nav-link" data-route>Add Money</a></li>
+        <li><a href="#/history" class="nav-link" data-route>History</a></li>
+        <li><a href="#/profile" class="nav-link" data-route>Profile</a></li>
+        <li><button id="logoutBtn" class="btn btn-ghost">Logout</button></li>
+      </ul>
+    </nav>
+    <button id="themeToggle" class="btn btn-ghost" aria-label="Toggle theme">Theme</button>
+  </header>
+
+  <main id="app" class="app-main">
+    <!-- Auth Screens -->
+    <section id="screen-auth" class="screen active">
+      <div class="card glass">
+        <h2 class="title">Login</h2>
+        <form id="loginForm" autocomplete="off">
+          <div class="form-group">
+            <label>Phone number</label>
+            <input type="tel" id="loginPhone" placeholder="01XXXXXXXXX" required />
+          </div>
+          <div class="form-group">
+            <label>PIN</label>
+            <input type="password" id="loginPin" placeholder="****" minlength="4" maxlength="6" required />
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+      </div>
+
+      <div class="card glass mt-16">
+        <h2 class="title">Signup</h2>
+        <form id="signupForm" autocomplete="off">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" id="signupName" placeholder="Your name" required />
+          </div>
+          <div class="form-group">
+            <label>Phone number</label>
+            <input type="tel" id="signupPhone" placeholder="01XXXXXXXXX" required />
+          </div>
+          <div class="form-group">
+            <label>PIN</label>
+            <input type="password" id="signupPin" placeholder="Set a PIN" minlength="4" maxlength="6" required />
+          </div>
+          <button type="submit" class="btn btn-secondary">Create account</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Dashboard -->
+    <section id="screen-dashboard" class="screen">
+      <div class="card glass balance-card">
+        <div class="balance-header">
+          <div class="avatar">
+            <img id="userAvatar" alt="avatar" />
+          </div>
+          <div>
+            <div class="user-name" id="userNameText">User</div>
+            <div class="user-phone" id="userPhoneText">01XXXXXXXXX</div>
+          </div>
+        </div>
+        <div class="balance-amount">
+          <span>Available balance</span>
+          <h1 id="balanceText">৳0</h1>
+        </div>
+      </div>
+
+      <div class="grid actions-grid">
+        <a href="#/send" class="action tile glass">
+          <span class="icon">💸</span>
+          <span class="label">Send Money</span>
+        </a>
+        <a href="#/cashout" class="action tile glass">
+          <span class="icon">🏧</span>
+          <span class="label">Cash Out</span>
+        </a>
+        <a href="#/recharge" class="action tile glass">
+          <span class="icon">📱</span>
+          <span class="label">Mobile Recharge</span>
+        </a>
+        <a href="#/billpay" class="action tile glass">
+          <span class="icon">🧾</span>
+          <span class="label">Pay Bill</span>
+        </a>
+        <a href="#/addmoney" class="action tile glass">
+          <span class="icon">💳</span>
+          <span class="label">Add Money</span>
+        </a>
+        <a href="#/history" class="action tile glass">
+          <span class="icon">🕘</span>
+          <span class="label">History</span>
+        </a>
+      </div>
+
+      <div class="card glass mt-24">
+        <h3 class="sub-title">Recent transactions</h3>
+        <ul id="recentList" class="list"></ul>
+      </div>
+    </section>
+
+    <!-- Send Money -->
+    <section id="screen-send" class="screen">
+      <div class="card glass">
+        <h2 class="title">Send Money</h2>
+        <form id="sendForm" autocomplete="off">
+          <div class="form-group">
+            <label>Receiver number</label>
+            <input type="tel" id="sendReceiver" placeholder="01XXXXXXXXX" required />
+          </div>
+          <div class="form-group">
+            <label>Amount</label>
+            <input type="number" id="sendAmount" placeholder="100" min="1" required />
+          </div>
+          <div class="form-group">
+            <label>PIN</label>
+            <input type="password" id="sendPin" placeholder="****" minlength="4" maxlength="6" required />
+          </div>
+          <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Cash Out -->
+    <section id="screen-cashout" class="screen">
+      <div class="card glass">
+        <h2 class="title">Cash Out</h2>
+        <form id="cashoutForm" autocomplete="off">
+          <div class="form-group">
+            <label>Agent number</label>
+            <input type="tel" id="cashAgent" placeholder="01XXXXXXXXX" required />
+          </div>
+          <div class="form-group">
+            <label>Amount</label>
+            <input type="number" id="cashAmount" placeholder="100" min="1" required />
+          </div>
+          <div class="form-group">
+            <label>PIN</label>
+            <input type="password" id="cashPin" placeholder="****" minlength="4" maxlength="6" required />
+          </div>
+          <button type="submit" class="btn btn-primary">Cash out</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Mobile Recharge -->
+    <section id="screen-recharge" class="screen">
+      <div class="card glass">
+        <h2 class="title">Mobile Recharge</h2>
+        <form id="rechargeForm" autocomplete="off">
+          <div class="form-group">
+            <label>Operator</label>
+            <select id="rechargeOperator" required>
+              <option value="">Select operator</option>
+              <option>Grameenphone</option>
+              <option>Robi</option>
+              <option>Banglalink</option>
+              <option>Teletalk</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Number</label>
+            <input type="tel" id="rechargeNumber" placeholder="01XXXXXXXXX" required />
+          </div>
+          <div class="form-group">
+            <label>Amount</label>
+            <input type="number" id="rechargeAmount" placeholder="50" min="10" required />
+          </div>
+          <button type="submit" class="btn btn-secondary">Recharge</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Bill Pay -->
+    <section id="screen-billpay" class="screen">
+      <div class="card glass">
+        <h2 class="title">Pay Bill</h2>
+        <form id="billForm" autocomplete="off">
+          <div class="form-group">
+            <label>Biller</label>
+            <select id="billBiller" required>
+              <option value="">Select biller</option>
+              <option>Electricity</option>
+              <option>Gas</option>
+              <option>Water</option>
+              <option>Internet</option>
+              <option>TV</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Account number</label>
+            <input type="text" id="billAccount" placeholder="Account/Customer ID" required />
+          </div>
+          <div class="form-group">
+            <label>Amount</label>
+            <input type="number" id="billAmount" placeholder="200" min="1" required />
+          </div>
+          <button type="submit" class="btn btn-secondary">Pay</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Add Money -->
+    <section id="screen-addmoney" class="screen">
+      <div class="card glass">
+        <h2 class="title">Add Money</h2>
+        <form id="addForm" autocomplete="off">
+          <div class="form-group">
+            <label>Source</label>
+            <select id="addSource" required>
+              <option value="">Select source</option>
+              <option>Card</option>
+              <option>Bank</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Amount</label>
+            <input type="number" id="addAmount" placeholder="500" min="1" required />
+          </div>
+          <button type="submit" class="btn btn-secondary">Add</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Transaction History -->
+    <section id="screen-history" class="screen">
+      <div class="card glass">
+        <h2 class="title">Transaction history</h2>
+        <div class="filters">
+          <select id="historyFilter">
+            <option value="all">All</option>
+            <option value="send">Send</option>
+            <option value="cashout">Cash Out</option>
+            <option value="recharge">Recharge</option>
+            <option value="billpay">Bill Pay</option>
+            <option value="addmoney">Add Money</option>
+          </select>
+        </div>
+        <ul id="historyList" class="list"></ul>
+      </div>
+    </section>
+
+    <!-- Profile & Settings -->
+    <section id="screen-profile" class="screen">
+      <div class="card glass">
+        <h2 class="title">Profile</h2>
+        <div class="profile-row">
+          <div class="avatar lg">
+            <img id="profileAvatar" alt="avatar" />
+          </div>
+          <div class="profile-info">
+            <div class="user-name" id="profileName">—</div>
+            <div class="user-phone" id="profilePhone">—</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card glass mt-16">
+        <h2 class="title">Settings</h2>
+        <form id="pinForm" autocomplete="off">
+          <div class="form-group">
+            <label>Current PIN</label>
+            <input type="password" id="currentPin" placeholder="****" minlength="4" maxlength="6" required />
+          </div>
+          <div class="form-group">
+            <label>New PIN</label>
+            <input type="password" id="newPin" placeholder="****" minlength="4" maxlength="6" required />
+          </div>
+          <button type="submit" class="btn btn-primary">Change PIN</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalMsg" aria-hidden="true">
+    <div class="modal-content glass">
+      <div id="modalIcon" class="modal-icon">✅</div>
+      <div id="modalTitle" class="modal-title">Success</div>
+      <div id="modalMsg" class="modal-msg">Your action completed.</div>
+      <div class="modal-actions">
+        <button id="modalClose" class="btn btn-primary">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <div class="footer-inner">
+      <span>Demo only • No real money • © Pay by Talha</span>
+    </div>
+  </footer>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
